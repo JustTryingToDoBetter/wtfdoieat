@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="WTF Do I Eat social image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B0B0F"/>
+      <stop offset="100%" stop-color="#161620"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#7F5AF0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1020" cy="120" r="220" fill="#7F5AF0" fill-opacity="0.15"/>
+  <circle cx="180" cy="560" r="260" fill="#FF6B35" fill-opacity="0.12"/>
+  <text x="100" y="265" fill="#FFFFFE" font-size="96" font-family="Sora, sans-serif" font-weight="800">WTF Do I Eat</text>
+  <text x="100" y="340" fill="#FF6B35" font-size="44" font-family="DM Sans, sans-serif" font-weight="700">Cape Town Restaurant Picker</text>
+  <text x="100" y="410" fill="#B6B8C6" font-size="34" font-family="DM Sans, sans-serif">Pick your mood. Get 3 real spots in 10 seconds.</text>
+  <rect x="100" y="460" width="500" height="74" rx="37" fill="url(#accent)"/>
+  <text x="150" y="508" fill="#0B0B0F" font-size="34" font-family="Sora, sans-serif" font-weight="700">wtfdoieat.app</text>
+</svg>
