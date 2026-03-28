@@ -8,7 +8,11 @@ export function trackEvent(name, props = {}) {
     sent = true;
   }
 
-  if (typeof window !== 'undefined' && window.posthog && typeof window.posthog.capture === 'function') {
+  if (
+    typeof window !== 'undefined' &&
+    window.posthog &&
+    typeof window.posthog.capture === 'function'
+  ) {
     window.posthog.capture(name, props);
     sent = true;
   }

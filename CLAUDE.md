@@ -88,6 +88,7 @@ The database contains 50+ REAL Cape Town restaurants with Google Places data. Ea
 ```
 
 ### Price tiers (in ZAR per person)
+
 - **local** — Under R60. Gatsby joints, corner takeaways, koeksisters, fish & chips
 - **budget** — R60–R100. Bunny chow, food halls, hidden gem cafes
 - **mid** — R100–R250. Proper sit-down restaurants, brunch spots, ramen bars
@@ -95,6 +96,7 @@ The database contains 50+ REAL Cape Town restaurants with Google Places data. Ea
 - **baller** — R500+. Tasting menus, fine dining, chef's table experiences
 
 ### Restaurant categories currently covered
+
 - Gatsby & takeaway joints (Golden Dish, Super Fisheries, Cosy Corner, Aneesa's)
 - Cape Malay (Faeeza's Home Kitchen, Bo-Kaap Kombuis, Biesmiellah)
 - Fish & chips (Kalky's, Lusitania, Mariner's Wharf)
@@ -108,6 +110,7 @@ The database contains 50+ REAL Cape Town restaurants with Google Places data. Ea
 - General (Tiger's Milk, VIXI, Kloof Street House, Villa 47, Utopia)
 
 ### Areas to expand to (future)
+
 - Stellenbosch / Winelands
 - Camps Bay / Clifton
 - Woodstock / Salt River
@@ -119,22 +122,23 @@ The database contains 50+ REAL Cape Town restaurants with Google Places data. Ea
 
 ## Mood Options (8 moods)
 
-| Emoji | Label | Value | Color |
-|-------|-------|-------|-------|
-| 😤 | Hangry | hangry | #FF4D4D |
-| 😴 | Lazy | lazy | #A78BFA |
-| 🥳 | Treat Me | treat | #F59E0B |
-| 🥗 | Healthy | healthy | #34D399 |
-| 🧸 | Comfort | comfort | #FB923C |
-| 🧑‍🍳 | Foodie | foodie | #EC4899 |
-| 🌍 | Adventure | adventurous | #06B6D4 |
-| 🎉 | Social | social | #8B5CF6 |
+| Emoji | Label     | Value       | Color   |
+| ----- | --------- | ----------- | ------- |
+| 😤    | Hangry    | hangry      | #FF4D4D |
+| 😴    | Lazy      | lazy        | #A78BFA |
+| 🥳    | Treat Me  | treat       | #F59E0B |
+| 🥗    | Healthy   | healthy     | #34D399 |
+| 🧸    | Comfort   | comfort     | #FB923C |
+| 🧑‍🍳    | Foodie    | foodie      | #EC4899 |
+| 🌍    | Adventure | adventurous | #06B6D4 |
+| 🎉    | Social    | social      | #8B5CF6 |
 
 ---
 
 ## Eating Personalities (20+)
 
 Each mood+budget combo maps to a unique "eating personality" with a name, emoji, and roast-style description. Examples:
+
 - **hangry + local** → "The Gatsby Goblin 👺" — "You inhale a full house steak masala before anyone's even ordered."
 - **treat + baller** → "The Main Character 👑" — "Sunset at Utopia, tasting at Belly of the Beast. Your life is a movie."
 - **comfort + local** → "The Cape Flats Kid 🫶" — "Koeksisters, gatsbys, and cream soda. That's not dinner, that's therapy."
@@ -162,6 +166,7 @@ Start Over → back to landing
 ```
 
 **Important UX rules:**
+
 - The entire flow should take under 10 seconds from tap to result
 - All screens must be smooth 60fps transitions (use CSS animations, NOT JS-heavy)
 - Tap targets must be minimum 44x44px (iOS/Android accessibility)
@@ -180,6 +185,7 @@ Three banner zones (non-intrusive):
 3. **Detail page** — below Google Maps link, larger format. High-intent users.
 
 **Rules:**
+
 - NEVER put an ad between the user's action and the result (no interstitials in MVP)
 - Ads should feel native to the dark UI — blend with the design
 - Use `<AdBanner />` component with `size="banner"` or `size="large"` prop
@@ -187,6 +193,7 @@ Three banner zones (non-intrusive):
 - Consider a local SA ad network as alternative (e.g., digital media companies in SA)
 
 **Future monetization:**
+
 - Remove ads for R19.99/month
 - Premium features: save dietary preferences, cuisine filters, "surprise me" mode, weekly eating personality report
 
@@ -197,21 +204,21 @@ Three banner zones (non-intrusive):
 ```js
 function getMatches(mood, budget, userLocation) {
   // 1. Filter restaurants by mood match
-  let pool = restaurants.filter(r => r.moods.includes(mood));
+  let pool = restaurants.filter((r) => r.moods.includes(mood));
 
   // 2. Filter by budget (include adjacent tiers for variety)
-  const tiers = ["local", "budget", "mid", "splurge", "baller"];
+  const tiers = ['local', 'budget', 'mid', 'splurge', 'baller'];
   const idx = tiers.indexOf(budget);
   const validTiers = tiers.slice(Math.max(0, idx - 1), idx + 2);
-  pool = pool.filter(r => validTiers.includes(r.price));
+  pool = pool.filter((r) => validTiers.includes(r.price));
 
   // 3. Fallback if pool too small
-  if (pool.length < 3) pool = restaurants.filter(r => r.moods.includes(mood));
+  if (pool.length < 3) pool = restaurants.filter((r) => r.moods.includes(mood));
   if (pool.length < 3) pool = restaurants;
 
   // 4. Sort by distance if location available
   if (userLocation) {
-    pool.forEach(r => r._dist = haversine(userLocation, { lat: r.lat, lng: r.lng }));
+    pool.forEach((r) => (r._dist = haversine(userLocation, { lat: r.lat, lng: r.lng })));
     pool.sort((a, b) => a._dist - b._dist);
   }
 
@@ -272,30 +279,34 @@ The result card itself should be designed to look good as a screenshot — this 
 ## Design System
 
 ### Colors
+
 ```css
---bg: #0B0B0F;
---surface: #13131A;
---surface2: #1A1A22;
---border: #1E1E28;
---text: #FFFFFE;
---text-muted: #72768A;
---accent: #FF6B35;        /* Primary orange */
---accent2: #7F5AF0;       /* Purple accent */
---green: #2CB67D;          /* Success / distance / "known for" */
---pink: #E53170;           /* Error / foodie mood */
+--bg: #0b0b0f;
+--surface: #13131a;
+--surface2: #1a1a22;
+--border: #1e1e28;
+--text: #fffffe;
+--text-muted: #72768a;
+--accent: #ff6b35; /* Primary orange */
+--accent2: #7f5af0; /* Purple accent */
+--green: #2cb67d; /* Success / distance / "known for" */
+--pink: #e53170; /* Error / foodie mood */
 ```
 
 ### Typography
+
 - **Display:** Sora 600/700/800
 - **Body:** DM Sans 400/500/600/700
 - Never use Inter, Roboto, or Arial
 
 ### Spacing & Radius
+
 - Border radius: 12px (small), 16px (cards), 20px (main cards), 50px (buttons)
 - Padding: 16–24px on cards, 20px screen padding
 - Gap: 8–12px between items
 
 ### Animations
+
 - `fadeUp`: 0.45s ease — for screen transitions
 - `popIn`: 0.4s ease — for result cards
 - `float`: 3s ease-in-out infinite — for hero emoji
@@ -307,6 +318,7 @@ The result card itself should be designed to look good as a screenshot — this 
 ## PWA Setup
 
 Make this installable as a PWA:
+
 - `manifest.json` with app name, icons, theme color (#0B0B0F), background color
 - Service worker for offline support (cache restaurant data)
 - Add to Home Screen prompt after 2nd visit
@@ -326,6 +338,7 @@ Make this installable as a PWA:
 ## Development Priorities
 
 ### Phase 1 — MVP Launch (current)
+
 - [x] Restaurant database (50+ spots)
 - [x] Mood + Budget flow
 - [x] Recommendation engine
@@ -344,6 +357,7 @@ Make this installable as a PWA:
 - [ ] Buy domain
 
 ### Phase 2 — Post-Launch
+
 - [ ] Wire up Google AdSense
 - [ ] Add Plausible/PostHog analytics
 - [ ] Track: mood selections, budget selections, clicks, shares, rerolls
@@ -354,6 +368,7 @@ Make this installable as a PWA:
 - [ ] Opening hours awareness (don't recommend closed spots)
 
 ### Phase 3 — Growth
+
 - [ ] Freemium tier (R19.99/mo removes ads + premium features)
 - [ ] Dietary filters (halaal, vegan, gluten-free)
 - [ ] "Surprise Me" mode (skip all questions, random pick)

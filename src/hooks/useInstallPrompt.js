@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { markInstall } from '../lib/metrics';
 
 const VISITS_KEY = 'wtf-visit-count';
 
@@ -43,7 +44,10 @@ export function useInstallPrompt() {
     if (!deferredPrompt) return;
 
     deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
+    const choice = await deferredPrompt.userChoice;
+    if (choice?.outcome === 'accepted') {
+      markInstall({ source: 'install_prompt', platform: choice.platform || 'unknown' });
+    }
     setDeferredPrompt(null);
     setCanInstall(false);
   }, [deferredPrompt]);

@@ -35,6 +35,25 @@ npm run build
 npm run preview
 ```
 
+## Live Nearby Providers
+
+The app can fetch live nearby restaurants from either provider:
+
+- Google Places API (New)
+- SerpAPI Google Local / Maps results
+
+Set one or both keys in `.env.local`:
+
+```bash
+VITE_GOOGLE_PLACES_API_KEY=your_google_places_key
+VITE_SERPAPI_KEY=your_serpapi_key
+```
+
+Provider order in app:
+
+1. Google Places first (if configured)
+2. SerpAPI fallback (if configured)
+
 ## Analytics setup
 
 1. Copy `.env.example` to `.env.local`.

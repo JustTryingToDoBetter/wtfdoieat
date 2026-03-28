@@ -9,15 +9,107 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
   body {
     margin: 0;
     min-width: 320px;
-    background: #0B0B0F;
-    color: #FFFFFE;
+    background: #0b0b0f;
+    color: #fffffe;
     font-family: 'DM Sans', sans-serif;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: contain;
+  }
+
+  button,
+  a,
+  [role='button'] {
+    touch-action: manipulation;
   }
 
   #root {
     min-height: 100dvh;
+  }
+}
+
+@layer utilities {
+  @keyframes spriteFloat {
+    0%,
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-10px) scale(1.03);
+    }
+  }
+
+  @keyframes spritePulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.92;
+    }
+  }
+
+  @keyframes ctaGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 122, 62, 0.42);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(255, 122, 62, 0);
+    }
+  }
+
+  @keyframes nudgeIn {
+    0% {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .sprite-bubble {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
+    animation:
+      spriteFloat 4.6s ease-in-out infinite,
+      spritePulse 3.4s ease-in-out infinite;
+  }
+
+  .cta-glow {
+    animation: ctaGlow 2.2s ease-in-out infinite;
+  }
+
+  .nudge-in {
+    animation: nudgeIn 0.45s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sprite-bubble {
+      animation: none;
+    }
+
+    .cta-glow,
+    .nudge-in {
+      animation: none;
+    }
   }
 }
